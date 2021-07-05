@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/noriaki/3594ss-databook/issues"
   },
-  "homepage": "https://github.com/noriaki/3594ss-databook#readme"
+  "homepage": "https://github.com/noriaki/3594ss-databook#readme",
+  "dependencies": {
+    "chrome-launcher": "^0.14.0",
+    "puppeteer-core": "^10.1.0"
+  }
 }
