@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/noriaki/3594ss-databook#readme",
   "dependencies": {
-    "chrome-launcher": "0.14.0",
+    "chrome-launcher": "0.14.1",
     "puppeteer-core": "10.1.0"
   },
   "devDependencies": {
