@@ -11,3 +11,11 @@ export const retrieveCost = (text: string): number => parseInt(text, 10);
 export const retrieveTeam = (text: string): string => text[0];
 
 export const retrieveTypes = (text: string): string[] => text.split(',');
+
+export const retrieveSpecialties = (text: string): string[] => {
+  const m = text.match(/シーズン(\d)/);
+  if (m) {
+    return [`S${m[1]}`];
+  }
+  return [];
+};

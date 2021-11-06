@@ -8,6 +8,7 @@ import {
   retrieveRarity,
   retrieveTeam,
   retrieveTypes,
+  retrieveSpecialties,
 } from './retrieve';
 
 const LIST_URL = 'https://gamewith.jp/sangokushi-shinsen/article/show/263306';
@@ -38,7 +39,7 @@ const gotoOptions: puppeteer.WaitForOptions = {
   });
 
   const csvData = [];
-  const charactor = charactorNames[0];
+  const charactor = charactorNames.find(({ gwId }) => gwId === '296471')!;
   // for (const charactor of charactorNames) {
   await page.goto(charactor.url, gotoOptions);
 
@@ -85,10 +86,11 @@ const gotoOptions: puppeteer.WaitForOptions = {
     cost: retrieveCost(basicData.cost),
     team: retrieveTeam(basicData.team),
     types: retrieveTypes(basicData.types),
+    specialties: retrieveSpecialties(basicData.rarity),
   };
   // }
 
-  console.log(data);
+  console.log(data, basicData);
 
   // const csvData = csvStringifySync(charactorNames, {
   //   header: true,
