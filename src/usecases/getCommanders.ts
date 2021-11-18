@@ -1,3 +1,4 @@
+import Commander from '~/models/Commander';
 import { build } from '~/drivers/crawlers/factory';
 import {
   getCommanderDetail,
@@ -14,7 +15,8 @@ import {
 
   for (const commander of sampleCommanders) {
     const data = await getCommanderDetail(page, commander);
-    console.log(data);
+    const c = new Commander(data.asCommanderObject());
+    console.log(c);
   }
 
   await browser.close();

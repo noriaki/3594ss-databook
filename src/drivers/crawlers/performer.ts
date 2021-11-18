@@ -1,12 +1,12 @@
 import puppeteer from 'puppeteer';
 
-import { GWCharactorBaseTypes, GWCharactor } from './datamodel';
+import { GWCommanderBaseTypes, GWCommander } from './datamodel';
 import { defaultGotoOptions } from './factory';
 
 export const getCommanderList = async (page: puppeteer.Page) => {
   const LIST_URL = 'https://gamewith.jp/sangokushi-shinsen/article/show/263306';
   await page.goto(LIST_URL, defaultGotoOptions);
-  const commanders: GWCharactorBaseTypes[] = await page.evaluate(() => {
+  const commanders: GWCommanderBaseTypes[] = await page.evaluate(() => {
     const links = document.querySelectorAll<HTMLAnchorElement>( // <
       '.s_shinsen_ichiran table tr.w-idb-element td:first-child a'
     );
@@ -21,7 +21,7 @@ export const getCommanderList = async (page: puppeteer.Page) => {
 
 export const getCommanderDetail = async (
   page: puppeteer.Page,
-  { name, url, gwId }: GWCharactorBaseTypes
+  { name, url, gwId }: GWCommanderBaseTypes
 ) => {
   await page.goto(url, defaultGotoOptions);
 
@@ -153,8 +153,8 @@ export const getCommanderDetail = async (
     description,
     gwId,
   };
-  GWCharactor.assertProps(props);
-  return new GWCharactor(props);
+  GWCommander.assertProps(props);
+  return new GWCommander(props);
 };
 
 // export const getTacticsList = async () => {};

@@ -1,3 +1,18 @@
+import { CommanderTypes } from '~/models/Commander';
+
+import {
+  translateAptitudes,
+  translateCost,
+  translateDescription,
+  translateGwId,
+  translateName,
+  translateRarity,
+  translateSpecialties,
+  translateStatus,
+  translateTeam,
+  translateTypes,
+} from './translator';
+
 export type Status = {
   attack: string;
   intelligence: string;
@@ -7,13 +22,13 @@ export type Status = {
   charm: string;
 };
 
-export type GWCharactorBaseTypes = {
+export type GWCommanderBaseTypes = {
   name: string;
   url: string;
   gwId: string;
 };
 
-export type GWCharactorTypes = Omit<GWCharactorBaseTypes, 'url'> & {
+export type GWCommanderTypes = Omit<GWCommanderBaseTypes, 'url'> & {
   rarity: string;
   cost: string;
   team: string;
@@ -32,16 +47,16 @@ export type GWCharactorTypes = Omit<GWCharactorBaseTypes, 'url'> & {
   description: string;
 };
 
-export class GWCharactor<T extends GWCharactorTypes> {
-  name: GWCharactorTypes['name'];
-  rarity: GWCharactorTypes['rarity'];
-  cost: GWCharactorTypes['cost'];
-  team: GWCharactorTypes['team'];
-  types: GWCharactorTypes['types'];
-  apt: GWCharactorTypes['apt'];
-  status: GWCharactorTypes['status'];
-  description: GWCharactorTypes['description'];
-  gwId: GWCharactorTypes['gwId'];
+export class GWCommander<T extends GWCommanderTypes> {
+  name: GWCommanderTypes['name'];
+  rarity: GWCommanderTypes['rarity'];
+  cost: GWCommanderTypes['cost'];
+  team: GWCommanderTypes['team'];
+  types: GWCommanderTypes['types'];
+  apt: GWCommanderTypes['apt'];
+  status: GWCommanderTypes['status'];
+  description: GWCommanderTypes['description'];
+  gwId: GWCommanderTypes['gwId'];
 
   constructor({
     name,
@@ -53,7 +68,7 @@ export class GWCharactor<T extends GWCharactorTypes> {
     status,
     description,
     gwId,
-  }: GWCharactorTypes) {
+  }: GWCommanderTypes) {
     this.name = name;
     this.rarity = rarity;
     this.cost = cost;
@@ -65,7 +80,22 @@ export class GWCharactor<T extends GWCharactorTypes> {
     this.gwId = gwId;
   }
 
-  static assertProps(obj: any): asserts obj is GWCharactorTypes {
+  asCommanderObject(): CommanderTypes {
+    return {
+      name: translateName(this.name),
+      rarity: translateRarity(this.rarity),
+      cost: translateCost(this.cost),
+      team: translateTeam(this.team),
+      types: translateTypes(this.types),
+      specialities: translateSpecialties(this.rarity),
+      apt: translateAptitudes(this.apt),
+      status: translateStatus(this.status),
+      description: translateDescription(this.description),
+      gwId: translateGwId(this.gwId),
+    };
+  }
+
+  static assertProps(obj: any): asserts obj is GWCommanderTypes {
     const errs: string[] = [];
     for (const prop of ['name', 'rarity', 'cost', 'team', 'types']) {
       if (obj[prop] === undefined) {
@@ -99,7 +129,7 @@ export class GWCharactor<T extends GWCharactorTypes> {
     }
     if (errs.length > 0) {
       throw new Error(
-        `GWCharactor Assertion Error: Expected props not to be undefined. [${errs.toString()}]`
+        `GWCommander Assertion Error: Expected props not to be undefined. [${errs.toString()}]`
       );
     }
     return obj;
