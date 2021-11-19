@@ -1,4 +1,4 @@
-import { CommanderTypes } from '~/models/Commander';
+import { aptitudeKeys, CommanderTypes, statusKeys } from '~/models/Commander';
 
 import {
   translateAptitudes,
@@ -9,6 +9,7 @@ import {
   translateRarity,
   translateSpecialties,
   translateStatus,
+  translateTactics,
   translateTeam,
   translateTypes,
 } from './translator';
@@ -45,6 +46,8 @@ export type GWCommanderTypes = Omit<GWCommanderBaseTypes, 'url'> & {
     max: Status;
   };
   description: string;
+  specificTactics: string;
+  inheritedTactics?: string;
 };
 
 export class GWCommander<T extends GWCommanderTypes> {
@@ -56,6 +59,8 @@ export class GWCommander<T extends GWCommanderTypes> {
   apt: GWCommanderTypes['apt'];
   status: GWCommanderTypes['status'];
   description: GWCommanderTypes['description'];
+  specificTactics: GWCommanderTypes['specificTactics'];
+  inheritedTactics: GWCommanderTypes['inheritedTactics'];
   gwId: GWCommanderTypes['gwId'];
 
   constructor({
@@ -67,6 +72,8 @@ export class GWCommander<T extends GWCommanderTypes> {
     apt,
     status,
     description,
+    specificTactics,
+    inheritedTactics,
     gwId,
   }: GWCommanderTypes) {
     this.name = name;
@@ -77,6 +84,8 @@ export class GWCommander<T extends GWCommanderTypes> {
     this.apt = apt;
     this.status = status;
     this.description = description;
+    this.specificTactics = specificTactics;
+    this.inheritedTactics = inheritedTactics;
     this.gwId = gwId;
   }
 
@@ -91,6 +100,9 @@ export class GWCommander<T extends GWCommanderTypes> {
       apt: translateAptitudes(this.apt),
       status: translateStatus(this.status),
       description: translateDescription(this.description),
+      specificTactics: translateTactics(this.specificTactics),
+      inheritedTactics:
+        this.inheritedTactics && translateTactics(this.inheritedTactics),
       gwId: translateGwId(this.gwId),
     };
   }
@@ -102,19 +114,12 @@ export class GWCommander<T extends GWCommanderTypes> {
         errs.push(prop);
       }
     }
-    for (const aptProp of ['cavalry', 'shield', 'bow', 'spear', 'siege']) {
+    for (const aptProp of aptitudeKeys) {
       if (obj.apt[aptProp] === undefined) {
         errs.push(`apt.${aptProp}`);
       }
     }
-    for (const statusProp of [
-      'attack',
-      'intelligence',
-      'defense',
-      'velocity',
-      'admin',
-      'charm',
-    ]) {
+    for (const statusProp of statusKeys) {
       if (obj.status.max[statusProp] === undefined) {
         errs.push(`status.max.${statusProp}`);
       }
@@ -122,7 +127,7 @@ export class GWCommander<T extends GWCommanderTypes> {
         errs.push(`status.min.${statusProp}`);
       }
     }
-    for (const otherProp of ['description', 'gwId']) {
+    for (const otherProp of ['specificTactics', 'description', 'gwId']) {
       if (obj[otherProp] === undefined) {
         errs.push(otherProp);
       }

@@ -117,10 +117,13 @@ export type CommanderTypes = {
   apt: Aptitudes;
   status: StatusMap;
   description: string;
+  specificTactics: string;
+  inheritedTactics?: string;
   gwId: number;
 };
 
 export default class Commander<T extends CommanderTypes> {
+  id: string;
   name: CommanderTypes['name'];
   rarity: CommanderTypes['rarity'];
   cost: CommanderTypes['cost'];
@@ -130,6 +133,8 @@ export default class Commander<T extends CommanderTypes> {
   apt: CommanderTypes['apt'];
   status: CommanderTypes['status'];
   description: CommanderTypes['description'];
+  specificTactics: CommanderTypes['specificTactics'];
+  inheritedTactics: CommanderTypes['inheritedTactics'];
   gwId: CommanderTypes['gwId'];
 
   constructor({
@@ -142,8 +147,11 @@ export default class Commander<T extends CommanderTypes> {
     apt,
     status,
     description,
+    specificTactics,
+    inheritedTactics,
     gwId,
   }: CommanderTypes) {
+    this.id = identify(rarity, name);
     this.name = name;
     this.rarity = rarity;
     this.cost = cost;
@@ -153,8 +161,17 @@ export default class Commander<T extends CommanderTypes> {
     this.apt = apt;
     this.status = status;
     this.description = description;
+    this.specificTactics = specificTactics;
+    this.inheritedTactics = inheritedTactics;
     this.gwId = gwId;
   }
 }
 
+// identifier
+const identify = (
+  rarity: CommanderTypes['rarity'],
+  name: CommanderTypes['name']
+): string => `☆${rarity}・${name}`;
+
+// utils
 const round2 = (num: number): number => Math.round(num * 100) / 100;
