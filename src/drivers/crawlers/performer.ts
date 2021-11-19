@@ -138,6 +138,17 @@ export const getCommanderDetail = async (
     }),
   };
 
+  const [specificTactics, inheritedTactics] = await page.evaluate(() => {
+    const elms = document.querySelectorAll<HTMLDivElement>(
+      '.s_shinsen_skill_table'
+    );
+    return Array.from(elms).map<string | undefined>(
+      (elm) =>
+        (elm?.previousElementSibling?.previousElementSibling as HTMLElement)
+          ?.innerText
+    );
+  });
+
   const description = await page.evaluate(
     () => document.querySelector<HTMLDivElement>('.s_shinsen_tips')?.innerText
   );
@@ -151,6 +162,8 @@ export const getCommanderDetail = async (
     apt,
     status,
     description,
+    specificTactics,
+    inheritedTactics,
     gwId,
   };
   GWCommander.assertProps(props);

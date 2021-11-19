@@ -116,4 +116,6 @@ export const translateStatus = (obj: {
 export const translateDescription = (text: string): string =>
   text.trim().split(/\n\n/).join('\n');
 
+export const translateTactics = (text: string): string => text.trim();
+
 export const translateGwId = (text: string): number => parseInt(text, 10);
