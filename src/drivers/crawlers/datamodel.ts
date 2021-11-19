@@ -1,4 +1,4 @@
-import { CommanderTypes } from '~/models/Commander';
+import { aptitudeKeys, CommanderTypes, statusKeys } from '~/models/Commander';
 
 import {
   translateAptitudes,
@@ -114,19 +114,12 @@ export class GWCommander<T extends GWCommanderTypes> {
         errs.push(prop);
       }
     }
-    for (const aptProp of ['cavalry', 'shield', 'bow', 'spear', 'siege']) {
+    for (const aptProp of aptitudeKeys) {
       if (obj.apt[aptProp] === undefined) {
         errs.push(`apt.${aptProp}`);
       }
     }
-    for (const statusProp of [
-      'attack',
-      'intelligence',
-      'defense',
-      'velocity',
-      'admin',
-      'charm',
-    ]) {
+    for (const statusProp of statusKeys) {
       if (obj.status.max[statusProp] === undefined) {
         errs.push(`status.max.${statusProp}`);
       }
