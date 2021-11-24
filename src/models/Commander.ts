@@ -166,6 +166,7 @@ export default class Commander<T extends CommanderTypes> {
     this.gwId = gwId;
   }
 }
+export type CommanderType = Commander<CommanderTypes>;
 
 // identifier
 const identify = (
