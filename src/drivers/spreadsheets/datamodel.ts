@@ -5,6 +5,11 @@ import type {
   CommanderTypes,
   Status,
 } from '~/models/Commander';
+import {
+  translateNo,
+  translateSpecialities,
+  translateTypes,
+} from './translator';
 
 type StatusValue = Status[keyof Status];
 
@@ -20,8 +25,8 @@ export type GSSCommanderTypes = {
   'apt/bow': Aptitude;
   'apt/spear': Aptitude;
   'apt/siege': Aptitude;
-  types: CommanderTypes['types'];
-  specialities: CommanderTypes['specialities'];
+  types: string;
+  specialities: string;
   'status/min/attack': StatusValue;
   'status/min/intelligence': StatusValue;
   'status/min/defense': StatusValue;
@@ -42,7 +47,7 @@ export type GSSCommanderTypes = {
   'status/delta/charm': StatusValue;
   description: CommanderTypes['description'];
   specificTactics: CommanderTypes['specificTactics'];
-  inheritedTactics: CommanderTypes['inheritedTactics'];
+  inheritedTactics: Exclude<CommanderTypes['inheritedTactics'], undefined>;
   gwId: CommanderTypes['gwId'];
 };
 
@@ -85,7 +90,7 @@ export class GSSCommander<T extends GSSCommanderTypes> {
 
   constructor(c: CommanderType) {
     this.id = c.id;
-    this.no = commanderNames.indexOf(c.name) + 1;
+    this.no = translateNo(c.name);
     this.name = c.name;
     this.rarity = c.rarity;
     this.cost = c.cost;
@@ -95,8 +100,8 @@ export class GSSCommander<T extends GSSCommanderTypes> {
     this['apt/bow'] = c.apt.bow;
     this['apt/spear'] = c.apt.spear;
     this['apt/siege'] = c.apt.siege;
-    this.types = c.types;
-    this.specialities = c.specialities;
+    this.types = translateTypes(c.types);
+    this.specialities = translateSpecialities(c.specialities);
     this['status/min/attack'] = c.status.min.attack;
     this['status/min/intelligence'] = c.status.min.intelligence;
     this['status/min/defense'] = c.status.min.defense;
@@ -117,11 +122,11 @@ export class GSSCommander<T extends GSSCommanderTypes> {
     this['status/delta/charm'] = c.status.delta.charm;
     this.description = c.description;
     this.specificTactics = c.specificTactics;
-    this.inheritedTactics = c.inheritedTactics;
+    this.inheritedTactics = c.inheritedTactics ?? '';
     this.gwId = c.gwId;
   }
 
-  static getProperties() {
+  static getProperties(): Array<keyof GSSCommanderTypes> {
     return [
       'id',
       'no',
@@ -160,4 +165,9 @@ export class GSSCommander<T extends GSSCommanderTypes> {
       'gwId',
     ];
   }
+
+  asObject(): GSSCommanderTypes {
+    return { ...this };
+  }
 }
+export type GSSCommanderType = GSSCommander<GSSCommanderTypes>;
