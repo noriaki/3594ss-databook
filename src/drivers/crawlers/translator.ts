@@ -18,8 +18,17 @@ import {
   StatusMap,
   Team,
 } from '~/models/Commander';
+import corrigendum from './corrigendum.json';
 
-export const translateName = (text: string): string => text.trim();
+export const translateName = (text: string): string => {
+  const { name: nameCorrigendum }: { name: { [k in string]: string } } =
+    corrigendum;
+  const name = text.trim();
+  if (nameCorrigendum[name] !== undefined) {
+    return nameCorrigendum[name];
+  }
+  return name;
+};
 
 export const translateRarity = (text: string): Rarity => {
   const m = text.trim().match(/星([1-5])/);
