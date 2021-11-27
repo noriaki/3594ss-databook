@@ -20,6 +20,7 @@ export const specTypeValues = [
   '補',
   '控',
   '謀',
+  '兼',
   '医',
   '蛮',
   '黄',
