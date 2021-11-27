@@ -50,6 +50,8 @@ export type GSSCommanderTypes = {
   inheritedTactics: Exclude<CommanderTypes['inheritedTactics'], undefined>;
   gwId: CommanderTypes['gwId'];
 };
+export type GSSCommanderKey = keyof GSSCommanderTypes;
+export type GSSCommanderKeys = GSSCommanderKey[];
 
 export class GSSCommander<T extends GSSCommanderTypes> {
   id: GSSCommanderTypes['id'];
@@ -126,7 +128,7 @@ export class GSSCommander<T extends GSSCommanderTypes> {
     this.gwId = c.gwId;
   }
 
-  static getProperties(): Array<keyof GSSCommanderTypes> {
+  static getProperties(): GSSCommanderKeys {
     return [
       'id',
       'no',

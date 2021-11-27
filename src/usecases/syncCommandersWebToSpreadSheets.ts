@@ -5,7 +5,12 @@ import {
   getCommanderList,
 } from '~/drivers/crawlers/performer';
 import { build as buildSpreadSheets } from '~/drivers/spreadsheets/factory';
-import { addCommander, syncHeader } from '~/drivers/spreadsheets/performer';
+import {
+  addCommander,
+  compareAndUpdateCommander,
+  findCommanderById,
+  syncHeader,
+} from '~/drivers/spreadsheets/performer';
 import { GSSCommander } from '~/drivers/spreadsheets/datamodel';
 
 (async () => {
@@ -29,7 +34,12 @@ import { GSSCommander } from '~/drivers/spreadsheets/datamodel';
       const data = await getCommanderDetail(page, commander);
       const c = new Commander(data.asCommanderObject());
       const ssData = new GSSCommander(c);
-      await addCommander(sheet, ssData);
+      const ssRow = await findCommanderById(sheet, ssData.id);
+      if (ssRow !== undefined) {
+        await compareAndUpdateCommander(sheet, ssRow, ssData);
+      } else {
+        await addCommander(sheet, ssData);
+      }
     }
   }
   await browser.close();
