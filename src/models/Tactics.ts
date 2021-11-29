@@ -11,7 +11,7 @@ export type TacticsType = typeof tacticsType[number];
 export const isValidTacticsType = (type: unknown): type is TacticsType =>
   tacticsType.includes(type as TacticsType);
 
-export const qualities = ['S', 'A', 'B'] as const;
+export const qualities = ['S', 'A', 'B', 'C', 'D'] as const;
 export type Quality = typeof qualities[number];
 export const isValidQuality = (quality: unknown): quality is Quality =>
   qualities.includes(quality as Quality);
