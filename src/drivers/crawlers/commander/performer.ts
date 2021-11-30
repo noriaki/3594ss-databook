@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer';
 
 import { GWCommanderBaseTypes, GWCommander } from './datamodel';
-import { defaultGotoOptions } from './factory';
+import { defaultGotoOptions } from '../factory';
 
 export const getCommanderList = async (page: puppeteer.Page) => {
   const LIST_URL = 'https://gamewith.jp/sangokushi-shinsen/article/show/263306';
