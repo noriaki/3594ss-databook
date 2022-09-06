@@ -27,7 +27,7 @@
     "@cybozu/eslint-config": "16.0.1",
     "@types/google-spreadsheet": "3.1.5",
     "@types/node": "16.11.41",
-    "@types/puppeteer": "5.4.4",
+    "@types/puppeteer": "5.4.6",
     "eslint": "7.32.0",
     "eslint-import-resolver-typescript": "2.5.0",
     "prettier": "2.7.1",
