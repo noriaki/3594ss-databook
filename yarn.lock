@@ -142,10 +142,10 @@
   resolved "https://registry.yarnpkg.com/@tsconfig/node16/-/node16-1.0.2.tgz#423c77877d0569db20e1fc80885ac4118314010e"
   integrity sha512-eZxlbI8GZscaGS7kkc/trHTT5xgrjH3/1n2JDwusC9iahPKWMRvRjJSAN5mCXviuTGQ/lHnhvv8Q1YTpnfz9gA==
 
-"@types/google-spreadsheet@3.1.5":
-  version "3.1.5"
-  resolved "https://registry.yarnpkg.com/@types/google-spreadsheet/-/google-spreadsheet-3.1.5.tgz#2bdc6f9f5372551e0506cb6ef3f562adcf44fc2e"
-  integrity sha512-7N+mDtZ1pmya2RRFPPl4KYc2TRgiqCNBLUZfyrKfER+u751JgCO+C24/LzF70UmUm/zhHUbzRZ5mtfaxekQ1ZQ==
+"@types/google-spreadsheet@3.3.0":
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/@types/google-spreadsheet/-/google-spreadsheet-3.3.0.tgz#9a1653de44b57f81ff54a87e4f6b41b608d8d8de"
+  integrity sha512-5VXD/RvRkeH1dgYvMh1vJfjTUpJwMnfOAAkMcK7IwZmv/jY3qnXrW7Iye74mZ3nXIP8OjGzh4qLc1+TaKdvLfA==
 
 "@types/json-schema@^7.0.9":
   version "7.0.9"
@@ -1384,10 +1384,10 @@ google-p12-pem@^3.0.3:
   dependencies:
     node-forge "^0.10.0"
 
-google-spreadsheet@3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/google-spreadsheet/-/google-spreadsheet-3.2.0.tgz#ce8aa75c15705aa950ad52b091a6fc4d33dcb329"
-  integrity sha512-z7XMaqb+26rdo8p51r5O03u8aPLAPzn5YhOXYJPcf2hdMVr0dUbIARgdkRdmGiBeoV/QoU/7VNhq1MMCLZv3kQ==
+google-spreadsheet@3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/google-spreadsheet/-/google-spreadsheet-3.3.0.tgz#725aecf9ea67ff8b8c45ddaf714f78f3e99db6a1"
+  integrity sha512-ahmRNh14s1i3phfvbF2mxen1lohWJpUaFWgsU6P6bXu7QrmxMaim1Ys/7BU4W5yucWCzphoIrHMbrbeIR5K9mw==
   dependencies:
     axios "^0.21.4"
     google-auth-library "^6.1.3"
