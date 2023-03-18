@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "@cybozu/eslint-config": "17.0.3",
-    "@types/google-spreadsheet": "3.3.0",
+    "@types/google-spreadsheet": "3.3.1",
     "@types/node": "16.11.58",
     "@types/puppeteer": "5.4.6",
     "eslint": "7.32.0",
